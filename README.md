@@ -19,18 +19,6 @@ A collection of bite-sized Android projects for learning and experimentation. Fr
 - 🌟 **Milestone: Java Refresher**  
   Get geared up with a Java refresher.
 
-- 🚀 **Destination: Launch Pad**  
-  Prepare and launch exciting projects.
-
-- 🔧 **Mission Control**  
-  Navigate through setup and getting started.
-
-- 🤝 **Join the Crew**  
-  Contribute and collaborate with others.
-
-- ⚖️ **Space Law**  
-  Understand licensing and legal considerations.
-
   ---
 
 ## Java Refresher for Android Development
