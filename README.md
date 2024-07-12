@@ -16,8 +16,8 @@ A collection of bite-sized Android projects for learning and experimentation. Fr
 
 ## 🗺️ Journey Map
 
-- 🌟 **Milestone: Java Refresher**  
-  Get geared up with a Java refresher.
+- 🌟 **Java Refresher** Get geared up with a Java refresher.
+- 🌟 **Android Installation and Setup** Learn how to install and set up Android Studio and the necessary SDKs to start developing Android applications.
 
   ---
 
@@ -241,3 +241,69 @@ Maven and Gradle are build automation tools used primarily for Java projects. Th
 This refresher covered the basics of Java that are essential for Android development. Understanding Java's syntax, object-oriented principles, and common tools will provide a strong foundation as you start learning Android development. Happy coding!
 
 ---
+
+# Android Development Setup
+
+This guide provides step-by-step instructions to install and set up Android Studio for developing Android applications.
+
+## Step 1: Download Android Studio
+
+1. Visit the [Android Studio download page](https://developer.android.com/studio/install).
+2. Click on the "Download Android Studio" button.
+3. Review and accept the terms and conditions to proceed with the download.
+
+## Step 2: Install Android Studio
+
+### Windows
+
+1. Locate the downloaded .exe file and double-click to launch the installer.
+2. Follow the setup wizard to install Android Studio:
+   - Choose the installation location.
+   - Select the components you want to install (Android Studio, Android SDK, Android Virtual Device).
+3. Once the installation is complete, click "Next" and then "Finish" to launch Android Studio.
+
+### macOS
+
+1. Locate the downloaded .dmg file and double-click to open it.
+2. Drag and drop the Android Studio icon into the Applications folder.
+3. Open the Applications folder and launch Android Studio.
+4. Follow the setup wizard to complete the installation.
+
+### Linux
+
+1. Locate the downloaded .zip file and extract it to a suitable location.
+2. Open a terminal and navigate to the extracted directory.
+3. Run the following command to launch the setup wizard:
+   ```bash
+   ./studio.sh
+
+4.  Follow the setup wizard to complete the installation.
+
+## Step 3: Configure Android Studio
+
+1.  When you first launch Android Studio, you will be greeted by the "Welcome to Android Studio" setup wizard.
+2.  Choose whether you want to import previous settings or not (if you are a new user, select "Do not import settings").
+3.  Click "Next" to continue with the standard setup.
+4.  Select the type of installation (Standard or Custom) and click "Next."
+5.  Verify the installation settings and click "Finish" to download and install any necessary components.
+
+## Step 4: Set Up an Android Virtual Device (AVD)
+
+1.  Open Android Studio and go to `Tools` > `AVD Manager`.
+2.  Click on "Create Virtual Device."
+3.  Choose a device definition and click "Next."
+4.  Select a system image for the virtual device and click "Next."
+5.  Configure the AVD settings as desired and click "Finish."
+
+## Step 5: Install Additional SDK Tools
+
+1.  Open Android Studio and go to `Tools` > `SDK Manager`.
+2.  In the SDK Platforms tab, select the Android versions you want to support and click "Apply."
+3.  In the SDK Tools tab, select any additional tools you need (e.g., Android Emulator, Android SDK Build-Tools) and click "Apply."
+
+## Conclusion
+
+You have now successfully installed and set up Android Studio. You are ready to start developing Android applications! For more detailed guidance, refer to the [official documentation](https://developer.android.com/studio/install).
+
+---
+
