@@ -18,7 +18,8 @@ A collection of bite-sized Android projects for learning and experimentation. Fr
 
 - 🌟 **Java Refresher** Get geared up with a Java refresher.
 - 🌟 **Android Installation and Setup** Learn how to install and set up Android Studio and the necessary SDKs to start developing Android applications.
-- **Creating App** Creating your first "Hello World!" app in Android Studio
+- 🌟 **Creating App** Creating your first "Hello World!" app in Android Studio
+- 🌟 **Activities** and **Layouts** in Android Development Using Java
 
   ---
 
@@ -378,3 +379,188 @@ Feel free to explore and modify your app further. Happy coding!
 ---
 
 
+# Activities and Layouts in Android Development Using Java
+
+## Introduction
+
+In Android development, activities and layouts are fundamental components. Activities represent a single screen with a user interface, while layouts define the structure of the user interface within an activity. This guide will cover the essentials of activities and layouts in Android development using Java.
+
+## Activities
+
+### What is an Activity?
+
+An activity in Android is a single, focused thing that the user can do. It usually represents a single screen in an application. Activities are subclasses of the `Activity` class.
+
+### Creating an Activity
+
+To create a new activity, follow these steps:
+
+1.  **Define the Activity in the Manifest:** Every activity must be declared in the `AndroidManifest.xml` file.
+    
+    
+    ```
+    <activity android:name=".MyActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+</activity>
+
+**Create the Activity Class:** Create a new Java class that extends `Activity` or `AppCompatActivity`.
+
+```
+package com.example.myapp;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MyActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my);
+    }
+}
+```
+
+### Activity Lifecycle
+
+An activity goes through various states during its lifecycle. Understanding these states is crucial for managing resources and ensuring a smooth user experience.
+
+1.  **onCreate():** Called when the activity is first created.
+2.  **onStart():** Called when the activity becomes visible to the user.
+3.  **onResume():** Called when the activity starts interacting with the user.
+4.  **onPause():** Called when the activity is partially obscured.
+5.  **onStop():** Called when the activity is no longer visible.
+6.  **onDestroy():** Called before the activity is destroyed.
+
+```
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    // Initialization code here
+}
+
+@Override
+protected void onStart() {
+    super.onStart();
+    // Code to handle the activity becoming visible
+}
+
+@Override
+protected void onResume() {
+    super.onResume();
+    // Code to handle the activity resuming
+}
+
+@Override
+protected void onPause() {
+    super.onPause();
+    // Code to handle the activity being partially obscured
+}
+
+@Override
+protected void onStop() {
+    super.onStop();
+    // Code to handle the activity being no longer visible
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    // Code to clean up resources
+}
+```
+
+## Layouts
+
+### What is a Layout?
+
+A layout defines the structure for a user interface in an activity. All user interface elements are built using View and ViewGroup objects. Layouts can be declared in XML or programmatically in Java.
+
+### Declaring Layouts in XML
+
+Layouts are typically defined in XML files located in the `res/layout` directory. Here is an example of a simple LinearLayout with a TextView and a Button:
+
+``
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello, World!"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me" />
+
+</LinearLayout>
+```
+
+### Common Layout Types
+
+1.  **LinearLayout:** Aligns its child elements in a single direction, either vertically or horizontally.
+
+```
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- Child views here -->
+</LinearLayout>
+```
+
+2. **RelativeLayout:** Enables you to position child elements relative to each other or the parent.
+```
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- Child views here -->
+</RelativeLayout>
+```
+3.  **ConstraintLayout:** A more flexible and efficient layout for creating complex user interfaces.
+
+```
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- Child views here -->
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+### Accessing Views in Java
+
+To interact with views defined in XML, use the `findViewById()` method in your activity.
+
+```
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    TextView textView = findViewById(R.id.textView);
+    Button button = findViewById(R.id.button);
+
+    button.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            textView.setText("Button Clicked!");
+        }
+    });
+}
+```
+## Conclusion
+
+Understanding activities and layouts is essential for developing Android applications. Activities represent individual screens, while layouts define the user interface for those screens. By mastering these concepts, you can create dynamic and user-friendly Android applications using Java.
+
+---
