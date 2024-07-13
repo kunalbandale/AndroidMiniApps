@@ -18,6 +18,7 @@ A collection of bite-sized Android projects for learning and experimentation. Fr
 
 - 🌟 **Java Refresher** Get geared up with a Java refresher.
 - 🌟 **Android Installation and Setup** Learn how to install and set up Android Studio and the necessary SDKs to start developing Android applications.
+- **Creating App** Creating your first "Hello World!" app in Android Studio
 
   ---
 
@@ -306,4 +307,74 @@ This guide provides step-by-step instructions to install and set up Android Stud
 You have now successfully installed and set up Android Studio. You are ready to start developing Android applications! For more detailed guidance, refer to the [official documentation](https://developer.android.com/studio/install).
 
 ---
+
+
+# Creating Your First Android App: Hello World!
+
+
+## Step 1: Create a New Project
+1. Open Android Studio.
+2. Click on **"Start a new Android Studio project"**.
+3. Select **"Empty Activity"** and click **Next**.
+4. Configure your project:
+   - **Name**: `HelloWorld`
+   - **Package name**: `com.example.helloworld`
+   - **Save location**: Choose a directory to save your project.
+   - **Language**: Choose either **Java** or **Kotlin**.
+   - **Minimum SDK**: Choose the minimum SDK level you want to support (e.g., API 21: Android 5.0 Lollipop).
+5. Click **Finish** and wait for Android Studio to create your project.
+
+## Step 2: Understand the Project Structure
+- **app/src/main/java/com/example/helloworld/MainActivity.java (or MainActivity.kt)**: The main activity file.
+- **app/src/main/res/layout/activity_main.xml**: The XML layout file for the main activity.
+- **AndroidManifest.xml**: The manifest file that contains essential information about your app.
+
+## Step 3: Modify the Layout
+1. Open `app/src/main/res/layout/activity_main.xml`.
+2. Modify the `TextView` element to display "Hello, World!" using `ConstraintLayout`.
+
+```xml
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello, World!"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+## Step 4: Run Your App
+
+1.  Connect an Android device via USB or set up an emulator.
+2.  Click on the **Run** button (green arrow) in Android Studio.
+3.  Select your device or emulator and click **OK**.
+4.  Wait for the app to build and install on the device.
+
+## Step 5: View Your App
+
+-   Once the app is installed, it should launch automatically, displaying "Hello, World!" on the screen.
+
+Congratulations! You've successfully created and run your first Android app.
+
+## Additional Resources
+
+-   [Official Android Developer Guide](https://developer.android.com/guide)
+-   [Android Studio User Guide](https://developer.android.com/studio/intro)
+
+Feel free to explore and modify your app further. Happy coding!
+
+---
+
 
