@@ -1249,3 +1249,225 @@ recyclerView.setAdapter(adapter);
 Both `ListView` and `RecyclerView` are powerful tools for displaying data in Android applications. While `ListView` is simpler, `RecyclerView` offers more features and better performance. Choose the one that fits your needs and follow best practices for optimal performance and user experience. For more details, refer to the official [Android developer documentation](https://developer.android.com/guide/topics/ui/layout/recyclerview).
 
 ---
+
+# Working with Databases in Android Using Java
+
+In this guide, we'll cover how to work with SQLite databases in Android. SQLite is a lightweight, disk-based database that is embedded into Android and provides a powerful way to manage persistent data.
+
+## Table of Contents
+
+1.  [Introduction](#introduction)
+2.  [Setting up SQLite in Android](#setting-up-sqlite-in-android)
+3.  [Creating a Database](#creating-a-database)
+4.  [CRUD Operations](#crud-operations)
+    -   [Create](#create)
+    -   [Read](#read)
+    -   [Update](#update)
+    -   [Delete](#delete)
+5.  [Using Room Persistence Library](#using-room-persistence-library)
+6.  [Conclusion](#conclusion)
+
+## Introduction
+
+SQLite is a relational database management system contained in a C library. Android comes with built-in support for SQLite databases. For more advanced use cases, Android Jetpack's Room persistence library provides an abstraction layer over SQLite.
+
+## Setting up SQLite in Android
+
+To work with SQLite directly, you typically extend the `SQLiteOpenHelper` class, which manages database creation and version management.
+
+## Creating a Database
+
+1.  **Create a new class** that extends `SQLiteOpenHelper`.
+```
+package com.example.myapp;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class MyDatabaseHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "mydatabase.db";
+    private static final int DATABASE_VERSION = 1;
+
+    public MyDatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // Create tables
+        String CREATE_TABLE = "CREATE TABLE my_table (id INTEGER PRIMARY KEY, name TEXT)";
+        db.execSQL(CREATE_TABLE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Handle database upgrade
+        db.execSQL("DROP TABLE IF EXISTS my_table");
+        onCreate(db);
+    }
+}
+```
+**Instantiate the database helper** in your activity.
+
+```
+MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
+SQLiteDatabase db = dbHelper.getWritableDatabase();
+```
+## CRUD Operations
+
+### Create
+
+To insert data into the database, use the `insert()` method.
+
+```
+ContentValues values = new ContentValues();
+values.put("name", "John Doe");
+long newRowId = db.insert("my_table", null, values);
+```
+
+### Read
+
+To read data from the database, use the `query()` method.
+
+```
+Cursor cursor = db.query(
+    "my_table",   // The table to query
+    null,         // The columns to return
+    null,         // The columns for the WHERE clause
+    null,         // The values for the WHERE clause
+    null,         // Group the rows
+    null,         // Filter by row groups
+    null          // The sort order
+);
+
+while (cursor.moveToNext()) {
+    long itemId = cursor.getLong(cursor.getColumnIndexOrThrow("id"));
+    String itemName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+}
+cursor.close();
+```
+### Update
+
+To update existing rows, use the `update()` method.
+
+```
+ContentValues values = new ContentValues();
+values.put("name", "Jane Doe");
+
+String selection = "id = ?";
+String[] selectionArgs = { "1" };
+
+int count = db.update(
+    "my_table",
+    values,
+    selection,
+    selectionArgs);
+```
+
+### Delete
+
+To delete rows from the database, use the `delete()` method.
+
+```
+String selection = "id = ?";
+String[] selectionArgs = { "1" };
+int deletedRows = db.delete("my_table", selection, selectionArgs);
+```
+
+## Using Room Persistence Library
+
+Room is a part of the Android Jetpack suite of libraries and provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+
+### Adding Room to Your Project
+
+1.  **Add the Room dependencies** in your `build.gradle` file.
+
+```
+dependencies {
+    implementation "androidx.room:room-runtime:2.4.0"
+    annotationProcessor "androidx.room:room-compiler:2.4.0"
+}
+```
+
+### Creating a Room Database
+
+1.  **Define an Entity**. This represents a table within the database.
+```
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
+public class User {
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
+    public String name;
+}
+
+
+```
+
+**Create a DAO (Data Access Object)**. This is where you define methods for interacting with the database.
+
+```
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+
+import java.util.List;
+
+@Dao
+public interface UserDao {
+    @Query("SELECT * FROM user")
+    List<User> getAll();
+
+    @Insert
+    void insertAll(User... users);
+
+    @Delete
+    void delete(User user);
+}
+
+
+```
+3.  **Define the database**. This ties together the entity and the DAO.
+
+```
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
+
+@Database(entities = {User.class}, version = 1)
+public abstract class AppDatabase extends RoomDatabase {
+    public abstract UserDao userDao();
+}
+
+```
+4.  **Instantiate the database**.
+
+```
+AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+        AppDatabase.class, "database-name").build();
+```
+
+### Using the Database
+
+To use the Room database, you can call the DAO methods.
+
+```
+UserDao userDao = db.userDao();
+User user = new User();
+user.name = "John Doe";
+userDao.insertAll(user);
+
+List<User> users = userDao.getAll();
+for (User u : users) {
+    System.out.println(u.name);
+}
+```
+## Conclusion
+
+Working with databases in Android is crucial for many applications. SQLite provides a powerful way to manage data, and Room simplifies database management with its abstraction layer. By following this guide, you can create, read, update, and delete records efficiently and integrate database management seamlessly into your Android applications. For more details, refer to the official [Android developer documentation](https://developer.android.com/training/data-storage/sqlite).
+
+---
